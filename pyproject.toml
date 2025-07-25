@@ -1,0 +1,26 @@
+[tool.flake8]
+exclude = [
+    "venv",
+    ".venv",
+    "__pycache__",
+    ".git",
+    "build",
+    "dist"
+]
+max-line-length = 79
+inline-quotes = "single"
+import-order-style = "google"
+application-import-names = [
+    "referal",
+]
+forbidden-functions = """
+    *: datetime.datetime.now, we use django utils
+    *: sys.path.append, usage of sys.path is banned
+    *: globals, usage of globals is banned
+    *: locals, usage of locals is banned
+"""
+
+[tool.black]
+line-length = 79
+target-version = ["py311"]
+skip-string-normalization = true
