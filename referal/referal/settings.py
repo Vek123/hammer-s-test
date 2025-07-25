@@ -1,4 +1,5 @@
 from pathlib import Path
+import sys
 
 import environ
 
@@ -11,6 +12,7 @@ env.read_env(BASE_DIR.parent / '.env')
 SECRET_KEY = env.str('DJANGO_SECRET_KEY', 'SECRET_KEY')
 
 DEBUG = env.str('DJANGO_DEBUG', True)
+TESTING = 'test' in sys.argv
 
 ALLOWED_HOSTS = env.list(
     'DJANGO_ALLOWED_HOSTS',
@@ -42,7 +44,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-if DEBUG:
+if DEBUG and not TESTING:
     INSTALLED_APPS.insert(-1, 'debug_toolbar')
 
     MIDDLEWARE = [
