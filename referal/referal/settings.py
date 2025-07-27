@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,19 @@ MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'users.User'
+
+RABBITMQ_HOST = env.str('RABBITMQ_HOST', 'localhost')
+RABBITMQ_PORT = env.int('RABBITMQ_PORT', 15672)
+RABBITMQ_USER = env.str('RABBITMQ_DEFAULT_USER', 'localhost')
+RABBITMQ_PASSWORD = env.str('RABBITMQ_DEFAULT_PASS', 'localhost')
+
+REDIS_HOST = env.str('REDIS_HOST', 'localhost')
+REDIS_PORT = env.int('REDIS_PORT', 6379)
+REDIS_DB = env.int('REDIS_DB', 0)
+REDIS_PASSWORD = env.str('REDIS_PASSWORD', 'default')
+REDIS_USER = env.str('REDIS_USER', 'redis')
+REDIS_USER_PASSWORD = env.str('REDIS_USER_PASSWORD', 'redis')
+
+REDIS_USER_PHONE_EXPIRATION_TIME = 10 * 60
