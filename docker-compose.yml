@@ -2,13 +2,19 @@ services:
 
   rabbitmq:
     image: rabbitmq:4.1.2-management
-    hostname: rabbitmq
+    hostname: "rabbitmq"
     ports:
-      - 15672:15672
-      - 5672:5672
+      - "15672:15672"
+      - "5672:5672"
     environment:
       - RABBITMQ_DEFAULT_USER=${RABBITMQ_DEFAULT_USER}
       - RABBITMQ_DEFAULT_PASS=${RABBITMQ_DEFAULT_PASS}
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: "unless-stopped"
 
   redis:
     image: redis:8.0.3
@@ -48,6 +54,57 @@ services:
     restart: unless-stopped
     tty: true
     stdin_open: true
+
+  django:
+    build:
+      dockerfile: "./docker/django/Dockerfile"
+    hostname: "django"
+    env_file:
+      - "./.env"
+    ports:
+      - "8000:8000"
+    volumes:
+      - "./referal/media/:/app/referal/media/"
+    depends_on:
+      - postgresql
+    restart: "unless-stopped"
+
+  phone_notification:
+    build:
+      dockerfile: "./docker/services/phone_notification/Dockerfile"
+    hostname: "phone-notification"
+    env_file:
+      - "./.env"
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+
+  nginx:
+    build:
+      dockerfile: "./docker/nginx/Dockerfile"
+    hostname: "nginx"
+    env_file:
+      - "./.env"
+    volumes:
+      - "./sec_transfer/media/:/var/www/media/"
+    depends_on:
+      - "django"
+    ports:
+      - "80:80"
+    restart: "unless-stopped"
+
+  postgresql:
+    container_name: "postgresql"
+    hostname: "$POSTGRES_HOST"
+    image: "postgres:latest"
+    expose:
+      - "$POSTGRES_PORT"
+    volumes:
+      - "./database/:/var/lib/postgresql/data"
+    env_file:
+      - "./.env"
+    shm_size: "1gb"
+    restart: "unless-stopped"
 
 volumes:
   redisdata:

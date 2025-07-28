@@ -1,0 +1,69 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-07-28 16:00+0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
+"(n%100>=11 && n%100<=14)? 2 : 3);\n"
+#: .\referal\users\apps.py:10
+msgid "Users"
+msgstr ""
+
+#: .\referal\users\models.py:29
+msgid "username"
+msgstr "логин"
+
+#: .\referal\users\models.py:32
+msgid "150 characters or fewer. Letters, digits and @/./+/-/_ only."
+msgstr "150 символов или меньше. Только буквы, цифры и @/./+/-/_."
+
+#: .\referal\users\models.py:37
+msgid "password"
+msgstr "пароль"
+
+#: .\referal\users\models.py:43
+msgid "phone"
+msgstr "телефон"
+
+#: .\referal\users\models.py:46
+msgid "+_ (___) ___-__-__"
+msgstr "+_ (___) ___-__-__"
+
+#: .\referal\users\models.py:49
+msgid "invite code"
+msgstr "код приглашения"
+
+#: .\referal\users\models.py:55
+msgid "claimed invite code"
+msgstr "применённый код приглашения"
+
+#: .\referal\users\models.py:87
+#, python-format
+msgid "%(field_name)s field has not valid phone number."
+msgstr "В поле %(field_name)s указан неправильный номер телефона."
+
+#: .\referal\users\serializers.py:33
+msgid "Code should contain only numbers or letters"
+msgstr "Код должен содержать только цифры или буквы"
+
+#: .\referal\users\serializers.py:66
+msgid "You can't delete or change claimed invite code"
+msgstr "Вы не можете удалить или изменить применённый код приглашения"
+
+#: .\referal\users\serializers.py:71
+msgid "Written invite code doesn't exist"
+msgstr "Указанный код приглашения не существует"

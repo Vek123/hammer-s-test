@@ -11,7 +11,7 @@ env.read_env(BASE_DIR.parent / '.env')
 
 SECRET_KEY = env.str('DJANGO_SECRET_KEY', 'SECRET_KEY')
 
-DEBUG = env.str('DJANGO_DEBUG', True)
+DEBUG = env.bool('DJANGO_DEBUG', True)
 TESTING = 'test' in sys.argv
 
 ALLOWED_HOSTS = env.list(
@@ -23,7 +23,6 @@ INTERNAL_IPS = env.list(
     'DJANGO_INTERNAL_IPS',
     default=['127.0.0.1'],
 )
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -38,6 +37,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -122,12 +122,17 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'ru'
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
 
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
 USE_TZ = True
+
+STATIC_ROOT = BASE_DIR / 'static/'
 
 STATIC_URL = 'static/'
 

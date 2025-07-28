@@ -9,11 +9,12 @@ from faststream import rabbit
 RABBIT_USER = os.environ.get('RABBITMQ_DEFAULT_USER', 'guest')
 RABBIT_PASS = os.environ.get('RABBITMQ_DEFAULT_PASS', 'guest')
 RABBIT_HOST = os.environ.get('RABBITMQ_HOST', 'localhost')
+RABBIT_PORT = os.environ.get('RABBITMQ_PORT', '5672')
 
 PHONE_NOTIFICATION_QUEUE = 'phone_notifications'
 
 broker = rabbit.RabbitBroker(
-    f'amqp://{RABBIT_USER}:{RABBIT_PASS}@localhost:5672',
+    f'amqp://{RABBIT_USER}:{RABBIT_PASS}@{RABBIT_HOST}:{RABBIT_PORT}',
 )
 app = FastStream(broker)
 
