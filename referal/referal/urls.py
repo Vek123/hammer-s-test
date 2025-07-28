@@ -10,7 +10,6 @@ urlpatterns = [
 ]
 
 if settings.DEBUG:
-    print(1)
     urlpatterns.append(path('__debug__/', include('debug_toolbar.urls')))
     urlpatterns += static(
         settings.MEDIA_URL,
